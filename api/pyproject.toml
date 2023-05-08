@@ -24,6 +24,14 @@ build-backend = "poetry.core.masonry.api"
 DJANGO_SETTINGS_MODULE = "config.settings"
 python_files = ["test_*.py"]
 
-[tool.isort]
-profile = "black"
+[tool.black]
 line-length = 120
+target-version = ['py311']
+include = '\.pyi?$'
+extend-exclude = '''
+/(
+  | blib2to3
+  | tests/data
+  | profiling
+)/
+'''
