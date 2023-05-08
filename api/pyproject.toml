@@ -22,6 +22,7 @@ dj-database-url = "2.0.0"
 djangorestframework = "3.14.0"
 drf-spectacular = "0.26.2"
 djangorestframework-stubs = "3.14"
+shortuuid = "1.0.11"
 
 
 [build-system]
