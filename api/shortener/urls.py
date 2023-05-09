@@ -1,9 +1,10 @@
 from django.urls import path
 
-from . import views
+from .views import CreateShortURLApi, ShortUrlRedirectView
 
 app_name = "shortener"
 
 urlpatterns = [
-    path("urls/", views.CreateShortURLApi.as_view(), name="shorten_url"),
+    path("api/v1/urls/", CreateShortURLApi.as_view(), name="shorten_url"),
+    path("<str:short_url>", ShortUrlRedirectView.as_view(), name="redirect"),
 ]

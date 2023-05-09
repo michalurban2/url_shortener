@@ -12,3 +12,7 @@ class URL(models.Model):
     class Meta:
         verbose_name = "URLs"
         verbose_name_plural = "URLs"
+
+    def save(self, *args, **kwargs):
+        if not len(URL.objects.filter(short_url=self.short_url)):
+            super().save(*args, **kwargs)

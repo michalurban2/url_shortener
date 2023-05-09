@@ -1,7 +1,6 @@
 import shortuuid
 from rest_framework import serializers
 
-from . import models
 from .models import URL
 
 
@@ -9,16 +8,19 @@ class URLSerializer(serializers.ModelSerializer):
     short_url = serializers.SerializerMethodField()
 
     class Meta:
-        model = models.URL
-        fields = ("short_url",)
+        model = URL
+        fields = (
+            "id",
+            "short_url",
+        )
 
     def get_short_url(self, obj):
-        return self.context.get("request").build_absolute_uri(obj.short_url)
+        return self.context.get("request").build_absolute_uri("/") + obj.short_url
 
 
 class OriginalURLSerializer(serializers.ModelSerializer):
     class Meta:
-        model = models.URL
+        model = URL
         fields = ("url",)
 
     def save(self, **kwargs):
