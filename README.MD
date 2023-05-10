@@ -71,7 +71,7 @@ To run this project, you will need to add the following environment variables to
 
 
 
-Also variables to your ./envs/postgres.env file
+Also, variables to your ./envs/postgres.env file
 
 `POSTGRES_USER` - Postgres root user
 
