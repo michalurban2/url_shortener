@@ -9,10 +9,7 @@ class URLSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = URL
-        fields = (
-            "id",
-            "short_url",
-        )
+        fields = ("short_url",)
 
     def get_short_url(self, obj):
         return self.context.get("request").build_absolute_uri("/") + obj.short_url
