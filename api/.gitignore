@@ -3,12 +3,11 @@
 
 # python
 **/*.pyc
+venv
 
 # django
-db.sqlite3
 .mypy_cache
 .pytest_cache
 __pycache__
 htmlcov
 .coverage
-

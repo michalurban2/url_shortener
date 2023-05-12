@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 import os
 from pathlib import Path
 import dj_database_url
+from config.swagger_settings import SPECTACULAR_SETTINGS
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -21,12 +22,10 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = "django-insecure-%t%$@%q279zm!8j@6e44ztb0-*dah$s5yedcsw+2ehutajns7o"
+SECRET_KEY = "secret"
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
-
-ALLOWED_HOSTS = []
 
 
 # Application definition
@@ -121,7 +120,13 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
-STATIC_URL = "static/"
+STATIC_URL = "/staticfiles/"
+STATICFILES_DIRS = [os.path.join(BASE_DIR, "static")]
+STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
+STATICFILES_FINDERS = [
+    "django.contrib.staticfiles.finders.FileSystemFinder",
+    "django.contrib.staticfiles.finders.AppDirectoriesFinder",
+]
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
@@ -134,9 +139,13 @@ REST_FRAMEWORK = {
     "DEFAULT_SCHEMA_CLASS": "drf_spectacular.openapi.AutoSchema",
 }
 
-SPECTACULAR_SETTINGS = {
-    "TITLE": "URL Shortener API",
-    "DESCRIPTION": "Best URL Shortener API in the world",
-    "VERSION": "1.0.0",
-    "SERVE_INCLUDE_SCHEMA": False,
-}
+SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
+ALLOWED_HOSTS = [
+    "localhost",
+    "http://127.0.0.1",
+    "serene-plains-78918..herokuapp.com",
+    "https://serene-plains-78918..herokuapp.com/",
+]
+INTERNAL_IPS = ALLOWED_HOSTS
+
+CSRF_TRUSTED_ORIGINS = ("https://serene-plains-78918..herokuapp.com",)
